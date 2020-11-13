@@ -7,41 +7,41 @@ import Button from "../components/Button";
 import TextInput from "../components/TextInput";
 import BackButton from "../components/BackButton";
 import { theme } from "../core/theme";
-// import { emailValidator, passwordValidator } from "../core/utils";
-// import { loginUser } from "../api/auth-api";
+import { emailValidator, passwordValidator } from "../core/utils";
+import { loginUser } from "../api/auth-api";
 import Toast from "../components/Toast";
 
 const LoginScreen = ({ navigation }) => {
-//   const [email, setEmail] = useState({ value: "", error: "" });
-//   const [password, setPassword] = useState({ value: "", error: "" });
-//   const [loading, setLoading] = useState(false);
-//   const [error, setError] = useState("");
- 
-//   const _onLoginPressed = async () => {
-//     if (loading) return;
+  const [email, setEmail] = useState({ value: "", error: "" });
+  const [password, setPassword] = useState({ value: "", error: "" });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-//     const emailError = emailValidator(email.value);
-//     const passwordError = passwordValidator(password.value);
+  const _onLoginPressed = async () => {
+    if (loading) return;
 
-//     if (emailError || passwordError) {
-//       setEmail({ ...email, error: emailError });
-//       setPassword({ ...password, error: passwordError });
-//       return;
-//     }
+    const emailError = emailValidator(email.value);
+    const passwordError = passwordValidator(password.value);
 
-//     setLoading(true);
+    if (emailError || passwordError) {
+      setEmail({ ...email, error: emailError });
+      setPassword({ ...password, error: passwordError });
+      return;
+    }
 
-//     const response = await loginUser({
-//       email: email.value,
-//       password: password.value
-//     });
+    setLoading(true);
 
-//     if (response.error) {
-//       setError(response.error);
-//     }
+    const response = await loginUser({
+      email: email.value,
+      password: password.value
+    });
 
-//     setLoading(false);
-//   };
+    if (response.error) {
+      setError(response.error);
+    }
+
+    setLoading(false);
+  };
 
   return (
     <Background>
@@ -54,6 +54,10 @@ const LoginScreen = ({ navigation }) => {
       <TextInput
         label="Correo"
         returnKeyType="next"
+        value={email.value}
+        onChangeText={text => setEmail({ value: text, error: "" })}
+        error={!!email.error}
+        errorText={email.error}
         autoCapitalize="none"
         autoCompleteType="email"
         textContentType="emailAddress"
@@ -63,6 +67,10 @@ const LoginScreen = ({ navigation }) => {
       <TextInput
         label="Contraseña"
         returnKeyType="done"
+        value={password.value}
+        onChangeText={text => setPassword({ value: text, error: "" })}
+        error={!!password.error}
+        errorText={password.error}
         secureTextEntry
         autoCapitalize="none"
       />
@@ -71,11 +79,15 @@ const LoginScreen = ({ navigation }) => {
         <TouchableOpacity
           onPress={() => navigation.navigate("ForgotPasswordScreen")}
         >
-          <Text style={styles.label}>Olvidó su contraseña?</Text>
+          <Text 
+          style={styles.label}
+          >
+          Olvidó su contraseña?
+          </Text>
         </TouchableOpacity>
       </View>
 
-      <Button mode="contained">
+      <Button loading={loading} mode="contained" onPress={_onLoginPressed}>
         Login
       </Button>
 
@@ -86,7 +98,7 @@ const LoginScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
-      <Toast onDismiss={() => setError("")} />
+      <Toast message={error} onDismiss={() => setError("")} />
     </Background>
   );
 };

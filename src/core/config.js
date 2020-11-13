@@ -1,11 +1,10 @@
-// Replace with your own firebase config!
 export const FIREBASE_CONFIG = {
-    apiKey: "AIzaSyBnyzkfWdSpai9wXBl_b5cK3Do_ohZba_Y",
-    authDomain: "prueba-login-45b20.firebaseapp.com",
-    databaseURL: "https://prueba-login-45b20.firebaseio.com",
-    projectId: "prueba-login-45b20",
-    storageBucket: "prueba-login-45b20.appspot.com",
-    messagingSenderId: "863955330314",
-    appId: "1:863955330314:web:1130e6a61f69119628c6f3",
-    measurementId: "G-X0ESK3QP3B"
+    apiKey: "AIzaSyBOs6N6MYgn5b1eFzca7MgLLaVfOa91C1U",
+    authDomain: "awesome-project-760f2.firebaseapp.com",
+    databaseURL: "https://awesome-project-760f2.firebaseio.com",
+    projectId: "awesome-project-760f2",
+    storageBucket: "awesome-project-760f2.appspot.com",
+    messagingSenderId: "563507867835",
+    appId: "1:563507867835:web:2ade97ba15a659d128f99e",
+    measurementId: "G-YSE86YW053"
 };

@@ -30,7 +30,7 @@ const Router = createStackNavigator(
     QuestionScreen
   },
   {
-    initialRouteName: "Dashboard",
+    initialRouteName: "QuestionScreen",
     headerMode: "none"
   }
 );

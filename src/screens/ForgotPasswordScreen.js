@@ -1,6 +1,6 @@
 import React, { memo, useState } from "react";
-import { Text, StyleSheet, TouchableOpacity } from "react-native";
-// import { emailValidator } from "../core/utils";
+import { StyleSheet } from "react-native";
+import { emailValidator } from "../core/utils";
 import Background from "../components/Background";
 import BackButton from "../components/BackButton";
 import Logo from "../components/Logo";
@@ -8,39 +8,39 @@ import Header from "../components/Header";
 import TextInput from "../components/TextInput";
 import { theme } from "../core/theme";
 import Button from "../components/Button";
-// import { sendEmailWithPassword } from "../api/auth-api";
+import { sendEmailWithPassword } from "../api/auth-api";
 import Toast from "../components/Toast";
 
 const ForgotPasswordScreen = ({ navigation }) => {
-  // const [email, setEmail] = useState({ value: "", error: "" });
-  // const [loading, setLoading] = useState(false);
-  // const [toast, setToast] = useState({ value: "", type: "" });
+  const [email, setEmail] = useState({ value: "", error: "" });
+  const [loading, setLoading] = useState(false);
+  const [toast, setToast] = useState({ value: "", type: "" });
 
-  // const _onSendPressed = async () => {
-  //   if (loading) return;
+  const _onSendPressed = async () => {
+    if (loading) return;
 
-  //   const emailError = emailValidator(email.value);
+    const emailError = emailValidator(email.value);
 
-  //   if (emailError) {
-  //     setEmail({ ...email, error: emailError });
-  //     return;
-  //   }
+    if (emailError) {
+      setEmail({ ...email, error: emailError });
+      return;
+    }
 
-  //   setLoading(true);
+    setLoading(true);
 
-  //   const response = await sendEmailWithPassword(email.value);
+    const response = await sendEmailWithPassword(email.value);
 
-  //   if (response.error) {
-  //     setToast({ type: "error", value: response.error });
-  //   } else {
-  //     setToast({
-  //       type: "success",
-  //       value: "Email with password has been sent."
-  //     });
-  //   }
+    if (response.error) {
+      setToast({ type: "error", value: response.error });
+    } else {
+      setToast({
+        type: "success",
+        value: "Email with password has been sent."
+      });
+    }
 
-  //   setLoading(false);
-  // };
+    setLoading(false);
+  };
 
   return (
     <Background>
@@ -48,12 +48,15 @@ const ForgotPasswordScreen = ({ navigation }) => {
 
       <Logo />
 
-      <Header>Restore Password</Header>
+      <Header>Restablecer Contraseña</Header>
 
       <TextInput
-        label="E-mail address"
+        label="Correo"
         returnKeyType="done"
         value={email.value}
+        onChangeText={text => setEmail({ value: text, error: "" })}
+        error={!!email.error}
+        errorText={email.error}
         autoCapitalize="none"
         autoCompleteType="email"
         textContentType="emailAddress"
@@ -61,16 +64,13 @@ const ForgotPasswordScreen = ({ navigation }) => {
       />
 
       <Button
+        loading={loading}
         mode="contained"
-        style={styles.button} >
-        Send Reset Instructions
+        onPress={_onSendPressed}
+        style={styles.button}
+      >
+        Enviar Instrucciones
       </Button>
-
-      <TouchableOpacity
-        style={styles.back}
-        onPress={() => navigation.navigate("LoginScreen")} >
-        <Text style={styles.label}>← Back to login</Text>
-      </TouchableOpacity>
 
       <Toast
         type={toast.type}
