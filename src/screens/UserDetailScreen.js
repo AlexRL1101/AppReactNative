@@ -7,16 +7,19 @@ import {
   ActivityIndicator,
   StyleSheet,
 } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
+import TextInput from "../components/TextDetails";
 
 import firebase from "../database/firebase";
 
 const UserDetailScreen = (props) => {
   const initialState = {
     id: "",
+    id_user: "",
     name: "",
-    email: "",
-    phone: "",
+    mail: "",
+    materia: "",
+    question: "",
+    file: "",
   };
 
   const [user, setUser] = useState(initialState);
@@ -27,7 +30,7 @@ const UserDetailScreen = (props) => {
   };
 
   const getUserById = async (id) => {
-    const dbRef = firebase.db.collection("users").doc(id);
+    const dbRef = firebase.db.collection("question").doc(id);
     const doc = await dbRef.get();
     const user = doc.data();
     setUser({ ...user, id: doc.id });
@@ -37,7 +40,7 @@ const UserDetailScreen = (props) => {
   const deleteUser = async () => {
     setLoading(true)
     const dbRef = firebase.db
-      .collection("users")
+      .collection("question")
       .doc(props.route.params.userId);
     await dbRef.delete();
     setLoading(false)
@@ -59,11 +62,14 @@ const UserDetailScreen = (props) => {
   };
 
   const updateUser = async () => {
-    const userRef = firebase.db.collection("users").doc(user.id);
+    const userRef = firebase.db.collection("question").doc(user.id);
     await userRef.set({
+      question: user.question,
+      file: user.file,
+      materia: user.materia,
+      id_user: user.id_user,
       name: user.name,
-      email: user.email,
-      phone: user.phone,
+      mail: user.mail,
     });
     setUser(initialState);
     props.navigation.navigate("UsersList");
@@ -85,29 +91,29 @@ const UserDetailScreen = (props) => {
     <ScrollView style={styles.container}>
       <View>
         <TextInput
-          placeholder="Name"
+          placeholder="Materia"
           autoCompleteType="username"
           style={styles.inputGroup}
-          value={user.name}
-          onChangeText={(value) => handleTextChange(value, "name")}
+          value={user.materia}
+          onChangeText={(value) => handleTextChange(value, "materia")}
         />
       </View>
       <View>
         <TextInput
-          autoCompleteType="email"
-          placeholder="Email"
+          placeholder="Question"
+          autoCompleteType="username"
           style={styles.inputGroup}
-          value={user.email}
-          onChangeText={(value) => handleTextChange(value, "email")}
+          value={user.question}
+          onChangeText={(value) => handleTextChange(value, "question")}
         />
       </View>
       <View>
         <TextInput
-          placeholder="Phone"
+          placeholder="Files"
           autoCompleteType="tel"
           style={styles.inputGroup}
-          value={user.phone}
-          onChangeText={(value) => handleTextChange(value, "phone")}
+          value={user.file}
+          onChangeText={(value) => handleTextChange(value, "file")}
         />
       </View>
       <View style={styles.btn}>

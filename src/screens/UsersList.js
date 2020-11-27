@@ -7,17 +7,18 @@ import firebase from "../database/firebase";
 
 const UserScreen = (props) => {
   const [users, setUsers] = useState([]);
-
+ 
   useEffect(() => {
-    firebase.db.collection("users").onSnapshot((querySnapshot) => {
+    firebase.db.collection("question").onSnapshot((querySnapshot) => {
       const users = [];
       querySnapshot.docs.forEach((doc) => {
-        const { name, email, phone } = doc.data();
+        const { name, materia, question, createdAt } = doc.data();
         users.push({
           id: doc.id,
+          materia,
           name,
-          email,
-          phone,
+          question,
+          createdAt,
         });
       });
       setUsers(users);
@@ -28,7 +29,7 @@ const UserScreen = (props) => {
     <ScrollView>
       <Button
         onPress={() => props.navigation.navigate("CreateUserScreen")}
-        title="Create User"
+        title="Crear Nueva Pregunta"
       />
       {users.map((user) => {
         return (
@@ -37,7 +38,7 @@ const UserScreen = (props) => {
             bottomDivider
             onPress={() => {
               props.navigation.navigate("UserDetailScreen", {
-                userId: user.id,
+                userId: user.id
               });
             }}
           >
@@ -50,8 +51,9 @@ const UserScreen = (props) => {
               rounded
             />
             <ListItem.Content>
-              <ListItem.Title>{user.name}</ListItem.Title>
-              <ListItem.Subtitle>{user.email}</ListItem.Subtitle>
+              <ListItem.Title>{user.materia}</ListItem.Title>
+              <ListItem.Subtitle>{user.question}</ListItem.Subtitle>
+              <ListItem.Subtitle style={{ color: '#5f9ea0' }}>{user.name}</ListItem.Subtitle>
             </ListItem.Content>
           </ListItem>
         );

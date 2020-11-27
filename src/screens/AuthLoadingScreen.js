@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { Component, memo } from "react";
 import { ActivityIndicator } from "react-native";
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -6,18 +6,13 @@ import Background from "../components/Background";
 import { theme } from "../core/theme";
 import { FIREBASE_CONFIG } from "../core/config";
 
-// Initialize Firebase
+//Initialize Firebase
 firebase.initializeApp(FIREBASE_CONFIG);
 
 const AuthLoadingScreen = ({ navigation }) => {
   firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      // User is logged in
-      navigation.navigate("HistoryScreen");
-    } else {
-      // User is not logged in
-      navigation.navigate("HomeScreen");
-    }
+    navigation.navigate(user ? 'App' : 'Auth' );
+    // navigation.navigate(user ? 'Dashboard' : 'HomeScreen' );
   });
 
   return (
@@ -26,5 +21,6 @@ const AuthLoadingScreen = ({ navigation }) => {
     </Background>
   );
 };
+
 
 export default memo(AuthLoadingScreen);

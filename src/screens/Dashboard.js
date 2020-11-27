@@ -6,16 +6,18 @@ import Paragraph from "../components/Paragraph";
 import Button from "../components/Button";
 import { logoutUser } from "../api/auth-api";
 
-const Dashboard = () => (
+const Dashboard = ({ navigation }) => (
   <Background>
     <Logo />
-    <Header>Let’s start</Header>
+    <Header>Preguntandonos App</Header>
     <Paragraph>
-      Your amazing app starts here. Open you favorite code editor and start
-      editing this project.
+      ¿Desea salir de la app?
     </Paragraph>
     <Button mode="outlined" onPress={() => logoutUser()}>
-      Logout
+      Salir
+    </Button>
+    <Button mode="outlined" onPress={() => navigation.navigate("UsersList")} >
+      Cancelar
     </Button>
   </Background>
 );

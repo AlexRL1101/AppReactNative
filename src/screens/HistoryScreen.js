@@ -1,54 +1,28 @@
-import React from "react";
+import React, { memo } from "react";
+import Background from "../components/Background";
+import Logo from "../components/Logo";
+import Header from "../components/Header";
+import Button from "../components/Button";
+import Paragraph from "../components/Paragraph";
 
-// Navigation
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+const HomeScreen = ({ navigation }) => (
+  <Background>
+    <Logo />
+    <Header>Preguntandonos App</Header>
 
-// Components
-import CreateUserScreen from "../screen/CreateUserScreen";
-import UserDetailScreen from "../screen/UserDetailScreen";
-import UsersList from "../screen/UsersList";
-// import { MainStackScreen } from "../components/MainStackScreen";
-
-const Stack = createStackNavigator();
-
-function MyStack() {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: "#621FF7",
-        },
-        headerTintColor: "#fff",
-        headerTitleStyle: {
-          fontWeight: "bold",
-        },
-      }}
+    <Paragraph>
+      Esta es la app donde por preguntar y responder ganas premios!!!
+    </Paragraph>
+    <Button mode="contained" onPress={() => navigation.navigate("LoginScreen")}>
+      Login
+    </Button>
+    <Button
+      mode="outlined"
+      onPress={() => navigation.navigate("RegisterScreen")}
     >
-      <Stack.Screen
-        name="UsersList"
-        component={UsersList}
-        options={{ title: "Users List" }}
-      />
-      <Stack.Screen
-        name="CreateUserScreen"
-        component={CreateUserScreen}
-        options={{ title: "Create a New User" }}
-      />
-      <Stack.Screen
-        name="UserDetailScreen"
-        component={UserDetailScreen}
-        options={{ title: "User Detail" }}
-      />
-    </Stack.Navigator>
-  );
-}
+      Sign Up
+    </Button>
+  </Background>
+);
 
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyStack />
-      {/* <MainStackScreen/> */}
-    </NavigationContainer>
-  );
-}
+export default memo(HomeScreen);

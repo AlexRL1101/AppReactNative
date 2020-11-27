@@ -11,7 +11,7 @@ export const HomeScreen = ({ navigation }) => (
         <Header>Preguntandonos App</Header>
 
         <Paragraph>
-            Perfil de Usuarios!!!
+            Descargas de Recursos!!!
     </Paragraph>
     </Background>
 );

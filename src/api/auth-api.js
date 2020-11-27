@@ -4,6 +4,18 @@ import "firebase/auth";
 export const logoutUser = () => {
   firebase.auth().signOut();
 };
+
+// export const nameMailUser = () => {
+//   let use = firebase.auth().currentUser;
+//   let name, mail, uid;
+
+//   if (use != null) {
+//     name = use.displayName;
+//     mail = use.email;
+//     uid = use.uid;
+//   }
+//   return (name, mail, uid)
+// };
  
 export const signInUser = async ({ name, email, password }) => {
   try {
