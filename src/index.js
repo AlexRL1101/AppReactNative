@@ -25,8 +25,8 @@ const AppContainer = createStackNavigator(
   {
     default: createBottomTabNavigator(
       {
-        UsersList: {
-          screen: UsersList,
+        ListQuestion: {
+          screen: ListQuestion,
           navigationOptions: {
             tabBarIcon: ({ tintColor }) => <Ionicons name="ios-home" size={38} color={tintColor} />
           }

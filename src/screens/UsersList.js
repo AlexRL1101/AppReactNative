@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-native";
-import { ListItem, Avatar } from "react-native-elements";
+import { ListItem } from "react-native-elements";
+import { Avatar } from 'react-native-paper';
 import { ScrollView } from "react-native-gesture-handler";
 
-import firebase from "../database/firebase";
+import fire from "../database/firebase";
 
 const UserScreen = (props) => {
+
   const [users, setUsers] = useState([]);
  
   useEffect(() => {
-    firebase.db.collection("question").onSnapshot((querySnapshot) => {
-      const users = [];
-      querySnapshot.docs.forEach((doc) => {
-        const { name, materia, question, createdAt } = doc.data();
-        users.push({
-          id: doc.id,
-          materia,
-          name,
-          question,
-          createdAt,
+      fire.db.collection("question").onSnapshot((querySnapshot) => {
+        const users = [];
+        querySnapshot.docs.forEach((doc) => {
+          const { name, materia, question, createdAt } = doc.data();
+          users.push({
+            id: doc.id,
+            materia,
+            name,
+            question,
+            createdAt,
+          });
         });
+        setUsers(users);
       });
-      setUsers(users);
-    });
   }, []);
 
   return (
@@ -43,11 +45,14 @@ const UserScreen = (props) => {
             }}
           >
             <ListItem.Chevron />
-            <Avatar
-              source={{
-                uri:
-                  "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
-              }}
+            <Avatar.Image
+              source={
+                // {
+                // uri:
+                //     "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+                // }
+                require('../assets/profile.jpg')
+              }
               rounded
             />
             <ListItem.Content>

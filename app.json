@@ -4,7 +4,7 @@
     "slug": "AwesomeProject",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -14,8 +14,12 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
-      "**/*"
+      "assets/*"
     ],
+    "android": {
+      "package": "com.devweb.appquestions",
+      "versionCode": 1
+    },
     "ios": {
       "supportsTablet": true
     },

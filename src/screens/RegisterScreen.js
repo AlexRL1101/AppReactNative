@@ -22,26 +22,6 @@ const RegisterScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  state = {
-    profile: {
-      avatar: null
-    }
-  }
-
-  handlerPickAvatar = async () => {
-    UserPermissions.getCameraPermission();
-
-    let result = await ImagenPicker.lauchImageLibraryAsync({
-      mediaTypes: ImagePickerIOS.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3]
-    });
-
-    if(!result.cancelled) {
-      this.setState({ user: {...this.state.user, avatar: result.uri } });
-    }
-  }
-
   const _onSignUpPressed = async () => {
     if (loading) return;
 

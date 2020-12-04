@@ -16,7 +16,7 @@ const Dashboard = ({ navigation }) => (
     <Button mode="outlined" onPress={() => logoutUser()}>
       Salir
     </Button>
-    <Button mode="outlined" onPress={() => navigation.navigate("UsersList")} >
+    <Button mode="outlined" onPress={() => navigation.navigate("ListQuestion")} >
       Cancelar
     </Button>
   </Background>

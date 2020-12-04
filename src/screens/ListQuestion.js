@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { ListItem, Avatar } from "react-native-elements";
+import { ListItem, SearchBar } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
-import { Button } from "react-native";
+import { Avatar } from 'react-native-paper';
 
 import firebase from "../database/firebase";
 
@@ -25,11 +25,22 @@ const UserScreen = (props) => {
         });
     }, []);
 
+    
+
     return (
         <ScrollView>
-            <Button
+            {/* <Button
                 onPress={() => props.navigation.navigate("CreateUserScreen")}
                 title="Crear Nueva Pregunta"
+            /> */}
+
+            <SearchBar
+                round
+                searchIcon={{ size: 24 }}
+                // onChangeText={(text) => searchFilterFunction(text)}
+                // onClear={(text) => searchFilterFunction('')}
+                placeholder="Type Here..."
+                // value={search}
             />
 
             {users.map((user) => {
@@ -44,11 +55,14 @@ const UserScreen = (props) => {
                         }}
                     >
                         <ListItem.Chevron />
-                        <Avatar
-                            source={{
-                                uri:
-                                    "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
-                            }}
+                        <Avatar.Image
+                            source={
+                                // {
+                                // uri:
+                                //     "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+                                // }
+                                require('../assets/profile.jpg')
+                            }
                             rounded
                         />
                         <ListItem.Content>
